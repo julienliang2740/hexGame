@@ -4,6 +4,14 @@ function illicitResponse() {
     alert("I acknowledge your existence");
 }
 
+function rotateElement(element, degrees) {
+  element.style.transform = 'rotate(' + degrees + 'deg)';
+}
+
+function resetRotation(element) {
+  element.style.transform = 'rotate(0deg)';
+}
+
 function positionHexagrams() {
   const newGameButton = document.querySelector('.restart-button');
 
@@ -16,6 +24,16 @@ function positionHexagrams() {
   const HexSix = document.getElementById(hexArray[5]);
   const HexSeven = document.getElementById(hexArray[6]);
   const HexEight = document.getElementById(hexArray[7]);
+
+  // Reset rotations
+  resetRotation(HexOne);
+  resetRotation(HexTwo);
+  resetRotation(HexThree);
+  resetRotation(HexFour);
+  resetRotation(HexFive);
+  resetRotation(HexSix);
+  resetRotation(HexSeven);
+  resetRotation(HexEight);
 
   const offsetFromButton = 20; // Vertical offset from the New Game button
   const radius = 100; // Adjust radius as needed
@@ -39,14 +57,14 @@ function positionHexagrams() {
     // alert(hex.id);
     // Indexes go from 0-6 (for 7 hex)
     const angle = (2 * Math.PI / 8) * (index - 1); // Angle for each hexagram
-    //var thedegree = (360*angle)/(2 * Math.PI)
-    //alert(thedegree);
+    var angle_degree = (360*angle)/(2 * Math.PI)
     const x = center.x + radius * Math.cos(angle) - hex.offsetWidth / 2;
     const y = center.y + radius * Math.sin(angle) - hex.offsetHeight / 2;
 
     hex.style.position = 'absolute';
     hex.style.left = `${x}px`;
     hex.style.top = `${y}px`;
+    rotateElement(hex, angle_degree+90);
   });
 }
 
@@ -70,6 +88,11 @@ function rotateCounterclockwise() {
 
   const rotationEvent = new CustomEvent('hexArrayRotated', { detail: hexArray });
   document.dispatchEvent(rotationEvent);
+}
+
+function resetAll() {
+  hexArray = ['hex1', 'hex2', 'hex3', 'hex4', 'hex5', 'hex6', 'hex7', 'hex8'];
+  positionHexagrams();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
