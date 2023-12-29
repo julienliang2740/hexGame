@@ -295,7 +295,40 @@ hr {
   max-height: 30px;
 }
 
+.hexagram .yaoYANG{
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  background-color: black;
+}
+
+.hexagram .yaoYIN{
+  position: absolute;
+  width: 100%;
+  height: 20%;
+}
+
+.hexagram .yaoYIN .yaoYINleft, .hexagram .yaoYIN .yaoYINright {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  background-color: black;
+}
+
+.hexagram .yaoYIN .yaoYINleft {
+  left: 0;
+}
+
+.hexagram .yaoYIN .yaoYINright {
+  right: 0;
+}
+
+.shao { top: 0; }
+.zhong { top: 50%; }
+.zhang { top: 100%; }
+
 /* Individual hexagram styles */
+/*
 #hexQIAN { background-color: red; }
 #hexXUN { background-color: orange; }
 #hexKAN { background-color: yellow; }
@@ -304,6 +337,7 @@ hr {
 #hexZHEN { background-color: indigo;}
 #hexLI { background-color: purple;}
 #hexDUI { background-color: grey;}
+*/
 
 /*
 @media screen and (max-width: 520px) {
