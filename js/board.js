@@ -1,4 +1,4 @@
-let hexArray = ['hex1', 'hex2', 'hex3', 'hex4', 'hex5', 'hex6', 'hex7', 'hex8'];
+let hexArray = ['hexQIAN', 'hexXUN', 'hexKAN', 'hexGEN', 'hexKUN', 'hexZHEN', 'hexLI', 'hexDUI'];
 
 function illicitResponse() {
     alert("I acknowledge your existence");
@@ -47,7 +47,7 @@ function positionHexagrams() {
   // Find center for other hexagrams
   const center = {
     x: HexOne.offsetLeft + HexOne.offsetWidth / 2,
-    y: HexOne.offsetTop + HexOne.offsetHeight + radius // Adjust this value as needed
+    y: HexOne.offsetTop + HexOne.offsetHeight / 2 + radius // Adjust this value as needed
   };
 
   // Position  other hexagrams
@@ -91,7 +91,7 @@ function rotateCounterclockwise() {
 }
 
 function resetAll() {
-  hexArray = ['hex1', 'hex2', 'hex3', 'hex4', 'hex5', 'hex6', 'hex7', 'hex8'];
+  hexArray = ['hexQIAN', 'hexXUN', 'hexKAN', 'hexGEN', 'hexKUN', 'hexZHEN', 'hexLI', 'hexDUI'];
   positionHexagrams();
 }
 
