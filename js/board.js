@@ -1,8 +1,17 @@
-let hexArray = ['hexQIAN', 'hexXUN', 'hexKAN', 'hexGEN', 'hexKUN', 'hexZHEN', 'hexLI', 'hexDUI'];
+function gua(name, shaoYao, zhongYao, zhangYao,  shao, zhong, zhang) { // str, str, str, str, int, int, int
+  // Yao is either "yin" or "yang"
+  this.name = name;
 
-function illicitResponse() {
-    alert("I acknowledge your existence");
+  this.shaoYao = shaoYao;
+  this.zhongYao = zhongYao;
+  this.zhangYao = zhangYao;
+  
+  this.shao = shao;
+  this.zhong = zhong;
+  this.zhang = zhang;
 }
+
+let hexArray = ['hexQIAN', 'hexXUN', 'hexKAN', 'hexGEN', 'hexKUN', 'hexZHEN', 'hexLI', 'hexDUI'];
 
 function rotateElement(element, degrees) {
   element.style.transform = 'rotate(' + degrees + 'deg)';
@@ -36,13 +45,14 @@ function positionHexagrams() {
   resetRotation(HexEight);
 
   const offsetFromButton = 20; // Vertical offset from the New Game button
-  const radius = 100; // Adjust radius as needed
+  const radius = 200; // Adjust radius as needed
 
   // Position the first hexagram
   const buttonRect = newGameButton.getBoundingClientRect();
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   HexOne.style.position = 'absolute';
   HexOne.style.left = `${buttonRect.left + buttonRect.width / 2 - HexOne.offsetWidth / 2}px`; // Center align
-  HexOne.style.top = `${buttonRect.bottom + offsetFromButton}px`; // Position below the button
+  HexOne.style.top = `${buttonRect.bottom + scrollTop + offsetFromButton}px`; // Position below the button
 
   // Find center for other hexagrams
   const center = {
@@ -66,6 +76,19 @@ function positionHexagrams() {
     hex.style.top = `${y}px`;
     rotateElement(hex, angle_degree+90);
   });
+
+  // Position score ball at the vertical center
+  const scoreBall = document.getElementById('score-ball');
+
+  const hexOneBottom = HexOne.offsetTop + HexOne.offsetHeight;
+  const hexFiveTop = HexFive.offsetTop;
+  const middlePoint = (hexOneBottom + hexFiveTop) / 2;
+
+  // Assuming scoreBall height is less than the distance between HexOne and HexFive
+  scoreBall.style.position = 'absolute';
+  scoreBall.style.top = `${middlePoint - (scoreBall.offsetHeight / 2)}px`; // Center between HexOne and HexFive
+  scoreBall.style.left = '50%'; // Center horizontally
+  scoreBall.style.transform = 'translateX(-50%)'; // Adjust for its own width  
 }
 
 function rotateClockwise() {
@@ -91,6 +114,7 @@ function rotateCounterclockwise() {
 }
 
 function resetAll() {
+  console.log("Reset everything")
   hexArray = ['hexQIAN', 'hexXUN', 'hexKAN', 'hexGEN', 'hexKUN', 'hexZHEN', 'hexLI', 'hexDUI'];
   positionHexagrams();
 }
@@ -98,6 +122,9 @@ function resetAll() {
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+// For some reason the Hexagrams start off horizontally off-center, so run resetAll() before anything is done
+resetAll();
 
 document.addEventListener('hexArrayRotated', function(e) {
   console.log('Hex array rotated. New order:', e.detail);
